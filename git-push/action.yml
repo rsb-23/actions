@@ -24,11 +24,11 @@ runs:
     - name: Switches to push_branch@latest along with changes.
       shell: bash
       run: |
-        git add .
-        git stash
+        git add . && git stash
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git switch ${{ inputs.branch }}
-        git checkout stash -- .
+        git stash pop
+        git checkout --theirs .
         git stash drop
 
     - name: Set up Git config
