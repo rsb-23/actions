@@ -24,8 +24,8 @@ runs:
     - name: Switches to push_branch@latest along with changes.
       shell: bash
       run: |
-        git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git stash
+        git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}        
         git switch ${{ inputs.branch }}
         git stash pop
 
