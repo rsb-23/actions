@@ -27,7 +27,7 @@ runs:
         git stash -u
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git switch ${{ inputs.branch }}
-        git stash pop
+        git stash pop -u
 
     - name: Set up Git config
       shell: bash
