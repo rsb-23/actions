@@ -29,6 +29,7 @@ runs:
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git switch ${{ inputs.branch }}
         git stash pop
+        git checkout --theirs .
         git reset
 
     - name: Set up Git config
