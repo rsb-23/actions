@@ -25,7 +25,9 @@ runs:
       shell: bash
       run: |
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
+        git stash
         git switch ${{ inputs.branch }}
+        git stash pop
 
     - name: Set up Git config
       shell: bash
