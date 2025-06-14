@@ -1,5 +1,6 @@
 name: "git-push"
 description: "Commit and push changes to a branch"
+
 inputs:
   git_user:
     description: "Git user.name for commit author"
@@ -16,9 +17,16 @@ inputs:
     description: "Push Branch"
     required: false
     default: ${{ github.ref_name }}
+
 runs:
   using: "composite"
   steps:
+    - name: Switches to push_branch@latest along with changes.
+      shell: bash
+      run: |
+        git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
+        git switch ${{ inputs.branch }}
+
     - name: Set up Git config
       shell: bash
       run: |
