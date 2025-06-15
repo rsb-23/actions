@@ -28,8 +28,7 @@ runs:
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git switch ${{ inputs.branch }}
         echo "➡️ Applying stash"
-        git stash pop
-        git checkout --theirs .
+        git stash pop || git checkout --theirs .
         git stash drop
         echo "➡️ Ready to push"
 
