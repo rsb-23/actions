@@ -27,15 +27,19 @@ runs:
         git add . && git stash
         git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
         git switch ${{ inputs.branch }}
+        echo "➡️ Applying stash"
         git stash pop
         git checkout --theirs .
         git stash drop
+        echo "➡️ Ready to push"
 
     - name: Set up Git config
       shell: bash
       run: |
         git config --global user.name "${{ inputs.git_user }}"
         git config --global user.email "${{ inputs.git_user }}@users.noreply.github.com"
+        echo "➡️ adding files"
         git reset && git add ${{ inputs.files }}
+        git status
         git commit -m "${{ inputs.commit_message }}"
         git push origin ${{ inputs.branch }}
