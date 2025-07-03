@@ -1,0 +1,25 @@
+name: Actionlint
+
+on:
+  workflow_call:
+
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache actionlint binary
+        id: cache-actionlint
+        uses: actions/cache@v4
+        with:
+          path: ~/go/bin/actionlint
+          key: actionlint-${{ runner.os }}
+
+      - name: Install actionlint
+        if: steps.cache-actionlint.outputs.cache-hit != 'true'
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
+
+      - name: Run actionlint
+        run: ~/go/bin/actionlint
