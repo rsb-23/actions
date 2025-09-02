@@ -1,11 +1,19 @@
-name: Actionlint [DEPRECATED]
+name: Workflow Linter
 
 on:
   workflow_call:
+    inputs:
+      tools:
+        description: "Comma-separated list of tools to run (e.g. actionlint,zizmor)"
+        required: true
+        type: string
 
 jobs:
   actionlint:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -22,8 +30,11 @@ jobs:
         run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
 
       - name: Run actionlint
+        if: contains( inputs.tools, 'actionlint')
         run: ~/go/bin/actionlint
 
-      - name: DEPRECATED
-        run: |
-          echo "::warning:: Please use 'workflow-linter.yml' instead."
+      - name: Run Zizmor
+        if: contains( inputs.tools, 'zizmor')
+        uses: zizmorcore/zizmor-action@v0.1.2
+        with:
+          advanced-security: false
