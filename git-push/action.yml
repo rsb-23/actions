@@ -23,10 +23,12 @@ runs:
   steps:
     - name: Switches to push_branch@latest along with changes.
       shell: bash
+      env:
+        PUSH_BRANCH: inputs.branch
       run: |
         git add . && git stash
-        git fetch origin ${{ inputs.branch }}:${{ inputs.branch }}
-        git switch ${{ inputs.branch }}
+        git fetch origin $PUSH_BRANCH:$PUSH_BRANCH
+        git switch $PUSH_BRANCH
         echo "➡️ Applying stash"
         git stash pop || git checkout --theirs .
         git stash drop
@@ -34,11 +36,16 @@ runs:
 
     - name: Set up Git config
       shell: bash
+      env:
+        GIT_USER: inpts.git_user
+        FILES: inputs.files
+        COMMIT_MESSAGE: inputs.commit_message
+        PUSH_BRANCH: inputs.branch
       run: |
-        git config --global user.name "${{ inputs.git_user }}"
-        git config --global user.email "${{ inputs.git_user }}@users.noreply.github.com"
+        git config --global user.name "$GIT_USER"
+        git config --global user.email "${GIT_USER}@users.noreply.github.com"
         echo "➡️ adding files"
-        git reset && git add ${{ inputs.files }}
+        git reset && git add $FILES
         git status
-        git commit -m "${{ inputs.commit_message }}"
-        git push origin ${{ inputs.branch }}
+        git commit -m "$COMMIT_MESSAGE"
+        git push origin $PUSH_BRANCH
