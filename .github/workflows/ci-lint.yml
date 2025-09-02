@@ -11,5 +11,7 @@ on:
 jobs:
   lint:
     uses: ./.github/workflows/workflow-linter.yml
+    permissions:
+      security-events: write
     with:
       tools: actionlint,zizmor
