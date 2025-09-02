@@ -11,9 +11,7 @@ on:
 jobs:
   actionlint:
     runs-on: ubuntu-latest
-    permissions:
-      security-events: write
-
+    if: contains( inputs.tools, 'actionlint')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -30,11 +28,19 @@ jobs:
         run: go install github.com/rhysd/actionlint/cmd/actionlint@latest
 
       - name: Run actionlint
-        if: contains( inputs.tools, 'actionlint')
         run: ~/go/bin/actionlint
 
+  zizmor:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+
+    if: contains( inputs.tools, 'zizmor')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
       - name: Run Zizmor
-        if: contains( inputs.tools, 'zizmor')
         uses: zizmorcore/zizmor-action@v0.1.2
         with:
           advanced-security: false
