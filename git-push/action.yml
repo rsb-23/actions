@@ -24,7 +24,7 @@ runs:
     - name: Switches to push_branch@latest along with changes.
       shell: bash
       env:
-        PUSH_BRANCH: inputs.branch
+        PUSH_BRANCH: ${{ inputs.branch }}
       run: |
         git add . && git stash
         git fetch origin $PUSH_BRANCH:$PUSH_BRANCH
@@ -37,10 +37,10 @@ runs:
     - name: Set up Git config
       shell: bash
       env:
-        GIT_USER: inpts.git_user
-        FILES: inputs.files
-        COMMIT_MESSAGE: inputs.commit_message
-        PUSH_BRANCH: inputs.branch
+        GIT_USER: ${{ inputs.git_user }}
+        FILES: ${{ inputs.files }}
+        COMMIT_MESSAGE: ${{ inputs.commit_message }}
+        PUSH_BRANCH: ${{ inputs.branch }}
       run: |
         git config --global user.name "$GIT_USER"
         git config --global user.email "${GIT_USER}@users.noreply.github.com"
