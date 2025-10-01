@@ -42,7 +42,7 @@ jobs:
            persist-credentials: false
 
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.1.2
+        uses: zizmorcore/zizmor-action@v0.2.0
         with:
           advanced-security: false
           online-audits: false
