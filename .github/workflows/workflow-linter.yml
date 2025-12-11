@@ -14,9 +14,9 @@ jobs:
     if: contains( inputs.tools, 'actionlint')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
-           persist-credentials: false
+          persist-credentials: false
 
       - name: Cache actionlint binary
         id: cache-actionlint
@@ -37,12 +37,12 @@ jobs:
     if: contains( inputs.tools, 'zizmor')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
-           persist-credentials: false
+          persist-credentials: false
 
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.1.2
+        uses: zizmorcore/zizmor-action@v0.3.0
         with:
           advanced-security: false
           online-audits: false
