@@ -2,8 +2,11 @@ name: checkout
 description: 'common checkout config'
 
 inputs:
+  ref:
+    description: 'The branch, tag or SHA to checkout'
+  fetch-depth:
+    default: 1
   fetch-tags:
-    required: false
     default: false
 
 runs:
@@ -12,6 +15,7 @@ runs:
     - name: Using common checkout action
       uses: actions/checkout@v6
       with:
-        fetch-depth: 0
+        ref: ${{ inputs.ref }}
+        fetch-depth: ${{ inputs.fetch-depth }}
         persist-credentials: false
         fetch-tags: ${{ inputs.fetch-tags }}

@@ -4,18 +4,15 @@ description: "Commit and push changes to a branch"
 inputs:
   git_user:
     description: "Git user.name for commit author"
-    required: false
     default: ${{ github.actor }}
   commit_message:
     description: "Commit message for the push"
     required: true
   files:
     description: 'Files to add (space separated, or use "." for all)'
-    required: false
     default: "."
   branch:
     description: "Push Branch"
-    required: false
     default: ${{ github.ref_name }}
 
 runs:

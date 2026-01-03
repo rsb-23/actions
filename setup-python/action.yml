@@ -3,9 +3,9 @@ description: 'common setup-python config'
 
 inputs:
   python-version:
-    required: false
     description: "py version"
-    default: "3.11"
+  python-version-file:
+    description: "files like pyproject.toml"
 
 runs:
   using: composite
@@ -13,5 +13,8 @@ runs:
     - name: Using common Setup-Python ${{ inputs.python-version }}
       uses: actions/setup-python@v6
       with:
-        python-version: ${{ inputs.python-version }}
+        python-version: ${{ env.PY_VERSION }}
+        python-version-file: ${{ inputs.python-version-file }}
         cache: pip
+      env:
+        PY_VERSION: ${{ inputs.python-version || (inputs.python-version-file == '' && '3.11') }}
