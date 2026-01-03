@@ -19,7 +19,7 @@ inputs:
     default: ${{ github.ref_name }}
 
 runs:
-  using: "composite"
+  using: composite
   steps:
     - name: Switches to push_branch@latest along with changes.
       shell: bash

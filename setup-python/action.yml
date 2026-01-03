@@ -1,0 +1,17 @@
+name: setup-python
+description: 'common setup-python config'
+
+inputs:
+  python-version:
+    required: false
+    description: "py version"
+    default: "3.11"
+
+runs:
+  using: composite
+  steps:
+    - name: Using common Setup-Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v6
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: pip

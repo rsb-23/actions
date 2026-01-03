@@ -1,0 +1,17 @@
+name: checkout
+description: 'common checkout config'
+
+inputs:
+  fetch-tags:
+    required: false
+    default: false
+
+runs:
+  using: composite
+  steps:
+    - name: Using common checkout action
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        fetch-tags: ${{ inputs.fetch-tags }}
