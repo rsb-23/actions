@@ -8,6 +8,9 @@ inputs:
     default: 1
   fetch-tags:
     default: false
+  persist-credentials:
+    description: 'Whether to configure the token or SSH key with the local git config'
+    default: false
 
 runs:
   using: composite
@@ -17,5 +20,5 @@ runs:
       with:
         ref: ${{ inputs.ref }}
         fetch-depth: ${{ inputs.fetch-depth }}
-        persist-credentials: false
+        persist-credentials: ${{ inputs.persist-credentials }}
         fetch-tags: ${{ inputs.fetch-tags }}

@@ -1,0 +1,39 @@
+name: "commit-n-push"
+description: "Commit and push changes to current branch"
+
+inputs:
+  git_user:
+    description: "Git user.name for commit author"
+    default: ${{ github.actor }}[ci]
+  commit_message:
+    description: "Commit message for the push"
+    required: true
+  files:
+    description: 'Files to add (space separated, or use "." for all)'
+    default: "."
+
+
+runs:
+  using: composite
+  steps:
+    - name: Configure git
+      shell: bash
+      env:
+        GIT_USER: ${{ inputs.git_user }}
+        PUSH_BRANCH: ${{ inputs.branch }}
+      run: |
+        git config --global user.name "$GIT_USER"
+        git config --global user.email "${GIT_USER}@users.noreply.github.com"
+
+    - name: Commit and push changes
+      shell: bash
+      env:
+        FILES: ${{ inputs.files }}
+        COMMIT_MESSAGE: ${{ inputs.commit_message }}
+      run: |
+        echo "➡️ adding files"
+        git reset && git add $FILES
+        git status
+        git commit -m "$COMMIT_MESSAGE" || echo "No changes to commit"
+        git push origin HEAD
+
