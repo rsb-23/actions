@@ -7,6 +7,10 @@ on:
         description: "Comma-separated list of tools to run (e.g. actionlint,zizmor)"
         required: true
         type: string
+    secrets:
+      token:
+        description: "Use { secrets.GITHUB_TOKEN }"
+        required: true
 
 jobs:
   actionlint:
@@ -17,7 +21,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           persist-credentials: false
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.token }}
 
       - name: Cache actionlint binary
         id: cache-actionlint
@@ -41,7 +45,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           persist-credentials: false
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.token }}
 
       - name: Run Zizmor
         uses: zizmorcore/zizmor-action@v0.3.0

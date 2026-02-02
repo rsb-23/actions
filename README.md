@@ -55,7 +55,6 @@ common actions for all repo
   name: CI Lint
   on:
     push:
-      branches: [ main, master ]
       paths:
         - '.github/**/*.yml'
         - '.github/**/*.yaml'
@@ -66,6 +65,6 @@ common actions for all repo
         security-events: write
       with:
         tools: actionlint,zizmor
-      secrets:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      secrets: 
+        token: ${{ secrets.GITHUB_TOKEN }}
   ```
