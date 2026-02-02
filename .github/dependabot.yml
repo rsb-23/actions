@@ -5,8 +5,8 @@ updates:
       - "/"
       - "/*/action.yml"
     schedule:
-      interval: "monthly"
+      interval: "quarterly"
     commit-message:
       prefix: ⬆️
     cooldown:
-      default-days: 45
+      default-days: 21

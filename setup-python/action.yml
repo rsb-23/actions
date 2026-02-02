@@ -17,4 +17,4 @@ runs:
         python-version-file: ${{ inputs.python-version-file }}
         cache: pip
       env:
-        PY_VERSION: ${{ inputs.python-version || (inputs.python-version-file == '' && '3.11') }}
+        PY_VERSION: ${{ inputs.python-version || (inputs.python-version-file == '' && '3.12') }}

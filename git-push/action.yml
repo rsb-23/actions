@@ -1,5 +1,5 @@
-name: "git-push"
-description: "Commit and push changes to a branch"
+name: "git-push [may be useless]"
+description: "Commit and push changes to other branch"
 
 inputs:
   git_user:
