@@ -48,7 +48,7 @@ jobs:
           token: ${{ secrets.token }}
 
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.3.0
+        uses: zizmorcore/zizmor-action@v0.5.2
         with:
           advanced-security: false
           online-audits: false
