@@ -15,6 +15,7 @@ on:
 jobs:
   actionlint:
     runs-on: ubuntu-latest
+    environment: linter
     if: contains( inputs.tools, 'actionlint')
     steps:
       - name: Checkout repository
@@ -39,6 +40,7 @@ jobs:
 
   zizmor:
     runs-on: ubuntu-latest
+    environment: linter
     if: contains( inputs.tools, 'zizmor')
     steps:
       - name: Checkout repository
@@ -48,7 +50,7 @@ jobs:
           token: ${{ secrets.token }}
 
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.3.0
+        uses: zizmorcore/zizmor-action@v0.5.2
         with:
           advanced-security: false
           online-audits: false
