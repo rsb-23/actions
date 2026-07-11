@@ -18,15 +18,16 @@ jobs:
     environment: linter
     if: contains( inputs.tools, 'actionlint')
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
+      - &checkout
+        name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
           token: ${{ secrets.token }}
 
       - name: Cache actionlint binary
         id: cache-actionlint
-        uses: actions/cache@v4
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/go/bin/actionlint
           key: actionlint-${{ runner.os }}
@@ -43,14 +44,10 @@ jobs:
     environment: linter
     if: contains( inputs.tools, 'zizmor')
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: false
-          token: ${{ secrets.token }}
+      - *checkout
 
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.5.2
+        uses: zizmorcore/zizmor-action@192e21d79ab29983730a13d1382995c2307fbcaa # v0.5.7
         with:
           advanced-security: false
           online-audits: false

@@ -1,7 +1,0 @@
-rules:
-  unpinned-uses:
-    config:
-      policies:
-        "*": ref-pin
-  artipacked:
-    disable: true
