@@ -3,3 +3,5 @@ rules:
     config:
       policies:
         "rsb-23/*": ref-pin
+  self-repository:
+    disable: true  # until actionlint#711 is fixed
